@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const youtubeApi = require('../api')
+const { creatBodyResponse } = require('../utils/createBodyResponse')
 
 router.get('/', async (req, res, next) => {
     try {
@@ -16,7 +17,9 @@ router.get('/', async (req, res, next) => {
             type: 'video'
         })
 
-        res.status(200).send(response.data)
+        const bodyResponse = creatBodyResponse(response)
+
+        res.status(200).send(bodyResponse)
     } catch (error) {
         next(error)
     }
