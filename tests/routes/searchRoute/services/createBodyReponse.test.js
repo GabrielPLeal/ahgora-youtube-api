@@ -1,4 +1,4 @@
-const { mockedResponse } = require('./mock/mockData')
+const { mockVideosData } = require('../../../mock/mockData')
 const {
     cleanWord,
     hasThisKey,
@@ -8,7 +8,7 @@ const {
     separeFiveMostUsedWords,
     getFiveMostUsedWords,
     creatBodyResponse,
-} = require('../utils/createBodyResponse')
+} = require('../../../../routes/searchRoute/services/createBodyResponse')
 
 describe('Test Clean Word Function', () => {
     it('Test pass a correct word should return it', () => {
@@ -129,17 +129,17 @@ describe('Test Separe Five Most Used Words Function', () => {
 
 describe('Test Get Five Most Used Words Function', () => {
     it('Test pass youtube api response (mocked) should return five most used words in titles and descriptions', () => {
-        const response = mockedResponse()
-        const fiveMostUsedWords = getFiveMostUsedWords(response)
-        expect(Object.keys(fiveMostUsedWords).length).toBe(5)
+        const videosData = mockVideosData(3)
+        const fiveMostUsedWords = getFiveMostUsedWords(videosData)
+        expect(Object.keys(fiveMostUsedWords)).toHaveLength(5)
     })
 })
 
 describe('Test Create Body Response Function', () => {
 
     it('Test pass youtube api response (mocked) return json body reponse', async () => {
-        const response = mockedResponse()
-        const bodyResponse = creatBodyResponse(response)
+        const videosData = mockVideosData(3)
+        const bodyResponse = creatBodyResponse(videosData)
         expect(bodyResponse).toHaveProperty('fiveWordsMostUsed')
     })
 })
