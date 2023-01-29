@@ -39,9 +39,9 @@ const separeFiveMostUsedWords = (wordsCount) => {
     return convertEntrieArrayInObject(organizedWordsCount.slice(0, 5))
 }
 
-const getFiveMostUsedWords = (response) => {
-    const titles = response.data.items.map(item => item.snippet.title)
-    const descriptions = response.data.items.map(item => item.snippet.description)
+const getFiveMostUsedWords = (videosData) => {
+    const titles = videosData.map(videoData => videoData.title)
+    const descriptions = videosData.map(videoData => videoData.description)
 
     let wordsCount = {}
 
@@ -51,10 +51,11 @@ const getFiveMostUsedWords = (response) => {
     return separeFiveMostUsedWords(wordsCount)
 }
 
-const creatBodyResponse = (response) => {
-    const fiveWordsMostUsed = getFiveMostUsedWords(response)
+const creatBodyResponse = (videosData) => {
+    const fiveWordsMostUsed = getFiveMostUsedWords(videosData)
     return {
         fiveWordsMostUsed: fiveWordsMostUsed,
+        videosData: videosData
     }
 }
 
