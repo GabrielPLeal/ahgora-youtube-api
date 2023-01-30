@@ -20,7 +20,7 @@ const isPreposition = (cleanedWord) => {
         "a", "o", "ante", "apos", "ate", "com", "contra",
         "de", "da", "desde", "em", "entre", "para",
         "perante", "por", "sem", "sob", "sobre", "tras",
-        "no", "do", "que", "como", "um", "uma", "ao"
+        "no", "do", "que", "como", "um", "uma", "ao", "se"
     ]
     return prepositions.includes(cleanedWord)
 }
