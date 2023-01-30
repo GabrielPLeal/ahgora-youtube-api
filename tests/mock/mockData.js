@@ -2,15 +2,15 @@ const mockVideoData = () => {
     return {
         videoId: 'u5NmlCarb3M',
         url: `https://www.youtube.com/watch?v=u5NmlCarb3M`,
-        title: 'That is a title',
-        description: 'That is a description',
-        duration: 10
+        title: 'That is a title with other words...',
+        description: 'That is a description with other words...',
+        duration: 30
     }
 }
 
 const mockVideosData = (qty) => {
     return arrayRange(1, qty, 1).map(
-        index => mockVideoData()
+        _ => mockVideoData()
     )
 }
 
@@ -48,10 +48,10 @@ const mockAllQuery = () => {
     return {
         search_query: "new",
         mon: "15",
-        tues: "20",
+        tues: "120",
         wed: "30",
-        thurs: "30",
-        fri: "90",
+        thurs: "150",
+        fri: "20",
         sat: "40",
         sun: "90",
     }

@@ -1,4 +1,6 @@
-const youtubeApi = require('../../../api')
+const youtubeApi = require('../../../externalApi/youtubeApi')
+const { getVideosId } = require('./takeVideosId')
+const { getWeekDaysTime } = require('./howManyDays')
 
 const getNextFiftyVideosId = (videosId, videosData) => {
     const initialIndex = videosData.length
@@ -19,9 +21,20 @@ const getVideoUrl = (videoId) => {
     return `https://www.youtube.com/watch?v=${videoId}`
 }
 
-const getDurationMinutes = (duration) => {
-    const minutesSeconds = duration.replace("PT", "").replace("S", "").split("M")
-    return Math.ceil(Number(minutesSeconds.join(".")))
+const durationToMinutes = (duration) => {
+    var match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
+
+    match = match.slice(1).map(function (x) {
+        if (x != null) {
+            return x.replace(/\D/, '')
+        }
+    });
+
+    var hours = (parseInt(match[0]) || 0)
+    var minutes = (parseInt(match[1]) || 0)
+    var seconds = (parseInt(match[2]) || 0)
+
+    return (hours * 60 + minutes + seconds / 100).toFixed(2)
 }
 
 const getVideoData = (item) => {
@@ -30,8 +43,25 @@ const getVideoData = (item) => {
         url: getVideoUrl(item.id),
         title: item.snippet.title,
         description: item.snippet.description,
-        duration: getDurationMinutes(item.contentDetails.duration)
+        duration: durationToMinutes(item.contentDetails.duration)
     }
+}
+
+const getLongestWeekDayTime = (query) => {
+    const weekDaysTime = getWeekDaysTime(query)
+    let longestWeekDayTime = 0
+    Object.values(weekDaysTime).forEach((time) => {
+        const dayTime = Number(time)
+        if (dayTime > longestWeekDayTime) {
+            longestWeekDayTime = dayTime
+        }
+    })
+    return longestWeekDayTime
+}
+
+const isDurationBiggerLongestTime = (videoData, query) => {
+    const longestWeekDayTime = getLongestWeekDayTime(query)
+    return Number(videoData.duration) > longestWeekDayTime
 }
 
 const makeVideosRequest = async (videosData, videosId) => {
@@ -43,18 +73,21 @@ const makeVideosRequest = async (videosData, videosId) => {
     videosData.length < 200 && await makeVideosRequest(videosData, videosId)
 }
 
-const getVideosData = async (videosId) => {
+const getVideosData = async (query) => {
+    const videosId = await getVideosId(query)
     let videosData = []
     await makeVideosRequest(videosData, videosId)
-    return videosData
+    return videosData.filter(videoData => !isDurationBiggerLongestTime(videoData, query))
 }
 
 module.exports = {
     getNextFiftyVideosId,
     getVideosRequestData,
     getVideoUrl,
-    getDurationMinutes,
     getVideoData,
     makeVideosRequest,
-    getVideosData
+    getVideosData,
+    durationToMinutes,
+    getLongestWeekDayTime,
+    isDurationBiggerLongestTime
 }
