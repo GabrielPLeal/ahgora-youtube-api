@@ -12,9 +12,11 @@ describe('Test Get Search Request Data', () => {
         const searchRequestQuery = getSearchRequestData(query, lastReponse)
         expect(searchRequestQuery).toEqual(expect.objectContaining({
             part: expect.any(String),
+            eventType: expect.any(String),
+            maxResults: expect.any(Number),
             q: expect.any(String),
-            type: expect.any(String),
-            maxResults: expect.any(Number)
+            regionCode: expect.any(String),
+            type: expect.any(String)
         }))
     });
     it('Pass query and lastReponse should return a object with search request default data and page token', () => {
@@ -23,9 +25,11 @@ describe('Test Get Search Request Data', () => {
         const searchRequestQuery = getSearchRequestData(query, lastReponse)
         expect(searchRequestQuery).toEqual(expect.objectContaining({
             part: expect.any(String),
-            q: expect.any(String),
-            type: expect.any(String),
+            eventType: expect.any(String),
             maxResults: expect.any(Number),
+            q: expect.any(String),
+            regionCode: expect.any(String),
+            type: expect.any(String),
             pageToken: expect.any(String)
         }))
     });

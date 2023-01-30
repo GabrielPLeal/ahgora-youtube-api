@@ -7,18 +7,11 @@ const hasRequiredQuerys = (query) => {
     )
 }
 
-const getWeekDaysTime = (query) => {
-    return Object.fromEntries(
-        Object.entries(query).filter(([key]) => !key.includes('search_query'))
-    )
-}
-
 const getSearchQuery = (query) => {
     return query.search_query
 }
 
 module.exports = {
-    getWeekDaysTime,
     getSearchQuery,
     hasRequiredQuerys
 }

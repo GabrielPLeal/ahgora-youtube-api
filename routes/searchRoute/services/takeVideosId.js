@@ -1,13 +1,15 @@
-const youtubeApi = require('../../../api')
+const youtubeApi = require('../../../externalApi/youtubeApi')
 const { getSearchQuery } = require('./defaultService')
 
 const getSearchRequestData = (query, lastResponse) => {
     const searchQuery = getSearchQuery(query)
     const searchRequestData = {
         part: 'snippet',
+        eventType: 'completed',
+        maxResults: 50,
         q: searchQuery,
-        type: 'video',
-        maxResults: 50
+        regionCode: 'BR',
+        type: 'video'
     }
     if (lastResponse) {
         searchRequestData['pageToken'] = lastResponse.nextPageToken

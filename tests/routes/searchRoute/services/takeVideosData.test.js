@@ -2,15 +2,16 @@ const {
     getNextFiftyVideosId,
     getVideosRequestData,
     getVideoUrl,
-    getDurationMinutes,
     getVideoData,
-    makeVideosRequest,
-    getVideosData
+    durationToMinutes,
+    getLongestWeekDayTime,
+    isDurationBiggerLongestTime
 } = require('../../../../routes/searchRoute/services/takeVideosData')
 const {
     mockVideosData,
     mockVideosId,
-    mockVideoApiItem
+    mockVideoApiItem,
+    mockAllQuery
 } = require('../../../mock/mockData')
 
 
@@ -49,10 +50,10 @@ describe('Test Get Video Url', () => {
     })
 })
 
-describe('Test Get Duration Minutes', () => {
+describe('Test Duration To Minutes', () => {
     it('Pass the video api duration should return duration in minutes', () => {
         const videoApiDuration = 'PT10M5S'
-        expect(getDurationMinutes(videoApiDuration)).toBe(11)
+        expect(durationToMinutes(videoApiDuration)).toBe('10.05')
     })
 })
 
@@ -65,8 +66,30 @@ describe('Test Get Video Data', () => {
             url: expect.any(String),
             title: expect.any(String),
             description: expect.any(String),
-            duration: expect.any(Number),
+            duration: expect.any(String),
         }))
+    })
+})
+
+describe('Test Get Longest Week Day Time', () => {
+    it('Pass query should return the longest week day time', () => {
+        const query = mockAllQuery()
+        const longestWeekDayTime = getLongestWeekDayTime(query)
+        expect(longestWeekDayTime).toBe(150)
+    })
+})
+
+describe('Test Is Duration Bigger Longest Time', () => {
+    it('Pass video data with duration longer than longest time and query should return true', () => {
+        const videosData = mockVideosData(1)
+        videosData[0].duration = '160'
+        const query = mockAllQuery()
+        expect(isDurationBiggerLongestTime(videosData[0], query)).toBeTruthy()
+    })
+    it('Pass video data with duration less than longest time and query should return false', () => {
+        const videosData = mockVideosData(1)
+        const query = mockAllQuery()
+        expect(isDurationBiggerLongestTime(videosData[0], query)).toBeFalsy()
     })
 })
 

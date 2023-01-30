@@ -1,7 +1,3 @@
-const request = require('supertest')
-const app = require('../../../app')
-const { mockStringQuery } = require('../../mock/mockData')
-
 describe('Youtube api tests', () => {
     // We aren't do request to youtube api on the tests. 
     // Need mock the response data.
