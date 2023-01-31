@@ -1,9 +1,9 @@
 const mockVideoData = () => {
     return {
         videoId: 'u5NmlCarb3M',
-        url: `https://www.youtube.com/watch?v=u5NmlCarb3M`,
+        url: `https://www.youtube.com/embed/u5NmlCarb3M`,
         title: 'That is a title with other words...',
-        description: 'That is a description with other words...',
+        description: 'That is a description with other words to test five words separete...',
         duration: 30
     }
 }
