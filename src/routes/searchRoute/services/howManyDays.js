@@ -1,6 +1,6 @@
 const getWeekDaysTime = (query) => {
     return Object.fromEntries(
-        Object.entries(query).filter(([key]) => !key.includes('search_query'))
+        Object.entries(query).filter(([key]) => !key.includes('search'))
     )
 }
 

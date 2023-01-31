@@ -16,7 +16,7 @@ describe('Test Get Week Days Time Function', () => {
     it('Pass the request query should return the week days time', () => {
         const query = mockAllQuery()
         const weekDaysTime = getWeekDaysTime(query)
-        expect(weekDaysTime).not.toHaveProperty('search_query')
+        expect(weekDaysTime).not.toHaveProperty('search')
         expect(weekDaysTime).toEqual(expect.objectContaining({
             mon: expect.any(String),
             tues: expect.any(String),

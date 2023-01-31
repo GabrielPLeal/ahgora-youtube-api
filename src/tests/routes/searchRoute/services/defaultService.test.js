@@ -10,7 +10,7 @@ describe('Test Get Week Days Time', () => {
     it('Pass the request query should return the week days time', () => {
         const query = mockAllQuery()
         const weekDaysTime = getWeekDaysTime(query)
-        expect(weekDaysTime).not.toHaveProperty('search_query')
+        expect(weekDaysTime).not.toHaveProperty('search')
         expect(weekDaysTime).toEqual(expect.objectContaining({
             mon: expect.any(String),
             tues: expect.any(String),
@@ -27,7 +27,7 @@ describe('Test Get Search Query', () => {
     it('Pass the request query should return the search query string', () => {
         const query = mockAllQuery()
         const searchQuery = getSearchQuery(query)
-        expect(searchQuery).toBe(query.search_query)
+        expect(searchQuery).toBe(query.search)
     });
 })
 

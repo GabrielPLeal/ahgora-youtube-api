@@ -46,7 +46,7 @@ describe('Test Get Videos Request Data', () => {
 describe('Test Get Video Url', () => {
     it('Pass videoId should return a video url', () => {
         const videoId = 1
-        expect(getVideoUrl(videoId)).toBe(`https://www.youtube.com/watch?v=${videoId}`)
+        expect(getVideoUrl(videoId)).toBe(`https://www.youtube.com/embed/${videoId}`)
     })
 })
 
