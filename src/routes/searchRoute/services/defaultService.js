@@ -1,6 +1,6 @@
 const hasRequiredQuerys = (query) => {
     const requiredKeys = [
-        "search_query", "mon", "tues",
+        "search", "mon", "tues",
         "wed", "thurs", "fri", "sat", "sun"
     ]
     return requiredKeys.every((key) => { return query.hasOwnProperty(key) }
@@ -8,7 +8,7 @@ const hasRequiredQuerys = (query) => {
 }
 
 const getSearchQuery = (query) => {
-    return query.search_query
+    return query.search
 }
 
 module.exports = {

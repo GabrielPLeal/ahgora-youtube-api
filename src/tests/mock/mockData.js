@@ -46,7 +46,7 @@ const mockResponse = () => {
 
 const mockAllQuery = () => {
     return {
-        search_query: "new",
+        search: "new",
         mon: "15",
         tues: "120",
         wed: "30",

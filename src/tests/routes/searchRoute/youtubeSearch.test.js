@@ -12,7 +12,7 @@ describe('Youtube api tests', () => {
 
     it('Test resquest without search term should return error status code 400', async () => {
         // const searchTerm = 'test'
-        // const response = await request(app).get(`/search?search_query=${searchTerm}`)
+        // const response = await request(app).get(`/search?search=${searchTerm}`)
         // expect(response.statusCode).toBe(400)
         // expect(response.body.error).toBe("Search term is required!")
         expect(true).toBeTruthy()

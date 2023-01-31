@@ -10,6 +10,7 @@ router.get('/', async (req, res, next) => {
             res.status(400).send({ error: "You need pass all search terms" })
         }
         const bodyResponse = await creatBodyResponse(query)
+        res.setHeader("Access-Control-Allow-Origin", "*")
         res.status(200).send(bodyResponse)
     } catch (error) {
         next(error)

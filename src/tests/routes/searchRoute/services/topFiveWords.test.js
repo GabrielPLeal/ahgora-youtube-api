@@ -2,7 +2,7 @@ const { mockVideosData } = require('../../../mock/mockData')
 const {
     cleanWord,
     hasThatKey,
-    isPreposition,
+    isUnecesaryWord,
     hasSetWordsCount,
     setWordsCount,
     countWords,
@@ -60,14 +60,14 @@ describe('Test Set Words Count Function', () => {
 
 })
 
-describe('Test Is Preposition Function', () => {
+describe('Test Is Unecessary Word Function', () => {
     it('Pass a preposition should return true', () => {
         const preposition = 'ate'
-        expect(isPreposition(preposition)).toBeTruthy()
+        expect(isUnecesaryWord(preposition)).toBeTruthy()
     })
     it('Pass a word should return false', () => {
         const word = 'valida'
-        expect(isPreposition(word)).toBeFalsy()
+        expect(isUnecesaryWord(word)).toBeFalsy()
     })
 
 })

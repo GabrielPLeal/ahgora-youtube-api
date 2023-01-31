@@ -15,18 +15,15 @@ const setWordsCount = (wordsCount, cleanedWord) => {
     }
 }
 
-const isPreposition = (cleanedWord) => {
-    const prepositions = [
-        "a", "o", "ante", "apos", "ate", "com", "contra",
-        "de", "da", "desde", "em", "entre", "para",
-        "perante", "por", "sem", "sob", "sobre", "tras",
-        "no", "do", "que", "como", "um", "uma", "ao", "se"
+const isUnecesaryWord = (cleanedWord) => {
+    const unecesaryWords = [
+        "contra", "desde", "entre", "para", "perante", "sobre"
     ]
-    return prepositions.includes(cleanedWord)
+    return unecesaryWords.includes(cleanedWord)
 }
 
 const hasSetWordsCount = (cleanedWord) => {
-    return cleanedWord.length > 1 && !isPreposition(cleanedWord)
+    return cleanedWord.length > 4 && !isUnecesaryWord(cleanedWord)
 }
 
 const countWords = (phrasesList, wordsCount) => {
@@ -70,7 +67,7 @@ const getFiveMostUsedWords = (videosData) => {
 module.exports = {
     cleanWord,
     hasThatKey,
-    isPreposition,
+    isUnecesaryWord,
     hasSetWordsCount,
     setWordsCount,
     countWords,
